@@ -1,3 +1,5 @@
+
+
 <?php $sidebar = SiteHelpers::menus('sidebar') ;
 $active = Request::segment(1);
 ?>
@@ -6,15 +8,22 @@ $active = Request::segment(1);
       <ul>
           <li class="logo" >
             @if(file_exists(public_path().'/uploads/images/'.config('sximo')['cnf_logo']) && config('sximo')['cnf_logo'] !='')
-              <img src="{{ asset('uploads/images/'.config('sximo')['cnf_logo'])}}" alt="{{ config('sximo')['cnf_appname'] }}" width="40" />
-              @else
-              <img src="{{ asset('uploads/logo.png')}}" alt="{{ config('sximo')['cnf_appname'] }}"  width="40" />
-              @endif 
-           </li>  
-          <li  >
-            <a href="javascript:;" code="menu-home" @if( $active !='user' && $active !='core'  && $active !='sximo' && $active !='cms') class="active" @endif ><i class="lni-home"></i>
+            <img src="{{ asset('uploads/images/'.config('sximo')['cnf_logo'])}}" alt="{{ config('sximo')['cnf_appname'] }}" width="40" />
+            @else
+            <img src="{{ asset('uploads/logo.png')}}" alt="{{ config('sximo')['cnf_appname'] }}"  width="40" />
+            @endif 
+          </li> 
+         
+          <li>
+            <a href="{{url('dashboard')}}" code="menu-home" @if( $active !='user' && $active !='core'  && $active !='sximo' && $active !='cms') class="active" @endif ><i class="lni-home"></i>
             </a>
-          </li>          
+          </li>  
+          @foreach ($sidebar as $menu)
+          <li>
+            <a href="javascript:;" code="{{$menu['menu_id']}}" @if( $active !='user' && $active !='core'  && $active !='sximo' && $active !='cms') class="active" @endif ><i class="{{$menu['menu_icons']}}"></i></i>
+            </a>
+          </li>    
+          @endforeach         
           <li>
             <a href="javascript:;"  code="menu-profile" @if( $active =='user') class="active" @endif>
               <i class="lni-user"></i>
@@ -31,12 +40,12 @@ $active = Request::segment(1);
             <li > <a href="javascript:;" code="menu-app"  @if( $active =='sximo') class="active" @endif><i class="lni-grid-alt"></i></a></li>
             @endif
           @endif
-          <li class="bottom logout" style="margin-bottom: 50px;"> 
+          <li > 
             <a href="{{ url('notification') }}"  code="menu-home"  >
               <span class="badge badge-pill badge-danger countNotif">0</span>
               <i class="lni-alarm"></i>
           </a></li>
-          <li  class="bottom logout"><a href="{{ url('user/logout')}}"class="confirmLogout" ><i class="lni-power-switch"></i></a></li>
+          <li  ><a href="{{ url('user/logout')}}"class="confirmLogout" ><i class="lni-power-switch"></i></a></li>
       </ul>    
     </div>
 
@@ -97,162 +106,181 @@ $active = Request::segment(1);
               </ul>   
               </div>   
 
-        </div>      
-     
+        </div>    
+        <div class="sidebar-menu" id="menu-app" >
+          <div class="p-3">
+            <ul >
+              <li class="header-menu"><span > Applications  </span></li>
+              
+              <li><a href="{{ url('') }}/sximo/config"><i class="lni-list"></i> @lang('core.t_generalsetting') </a> </li> 
+              <li class="header-menu"><span > Builder / Generator  </span></li>
+              <li><a href="{{ url('sximo/module')}}"><i class="lni-offer"></i> @lang('core.m_codebuilder')  </a> </li>
+              <!--<li><a href="{{ url('sximo/rac')}}"><i class="fa fa-random"></i> RestAPI Generator </a> </li> -->
+              <li><a href="{{ url('sximo/tables')}}"><i class="lni-database"></i> @lang('core.m_database') </a> </li>
+              <li><a href="{{ url('sximo/form')}}"><i class="lni-radio-button"></i> @lang('core.m_formbuilder') </a> </li>
+              <li class="header-menu"><span > utility  </span></li>
+              
+              <li><a href="{{ url('sximo/menu')}}"><i class="lni-radio-button"></i>  @lang('core.m_menu')</a> </li>              
+              <li> <a href="{{ url('sximo/code')}}"><i class="lni-infinite"></i> @lang('core.m_sourceeditor') </a>  </li>
+              
+              
+              <li> <a href="{{ url('sximo/config/clearlog')}}" class="clearCache"><i class="lni-spinner-arrow"></i> @lang('core.m_clearcache')</a> </li>
 
- 
-            <div class="sidebar-menu" id="menu-app" >
-              <div class="p-3">
-                <ul >
-                  <li class="header-menu"><span > Applications  </span></li>
-                  
-                  <li><a href="{{ url('') }}/sximo/config"><i class="lni-list"></i> @lang('core.t_generalsetting') </a> </li> 
-                  <li class="header-menu"><span > Builder / Generator  </span></li>
-                  <li><a href="{{ url('sximo/module')}}"><i class="lni-offer"></i> @lang('core.m_codebuilder')  </a> </li>
-                  <!--<li><a href="{{ url('sximo/rac')}}"><i class="fa fa-random"></i> RestAPI Generator </a> </li> -->
-                  <li><a href="{{ url('sximo/tables')}}"><i class="lni-database"></i> @lang('core.m_database') </a> </li>
-                  <li><a href="{{ url('sximo/form')}}"><i class="lni-radio-button"></i> @lang('core.m_formbuilder') </a> </li>
-                  <li class="header-menu"><span > utility  </span></li>
-                  
-                  <li><a href="{{ url('sximo/menu')}}"><i class="lni-radio-button"></i>  @lang('core.m_menu')</a> </li>              
-                  <li> <a href="{{ url('sximo/code')}}"><i class="lni-infinite"></i> @lang('core.m_sourceeditor') </a>  </li>
-                  
-                  
-                  <li> <a href="{{ url('sximo/config/clearlog')}}" class="clearCache"><i class="lni-spinner-arrow"></i> @lang('core.m_clearcache')</a> </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sidebar-menu" id="menu-admin" >
+          <div class="p-3">
+            <ul >
+              <li class="header-menu"><span > Users and Activities  </span></li>
+                <li ><a href="{{ url('core/users')}}"><i class="lni-users"></i>  @lang('core.m_users') <br /></a> </li> 
+                <li ><a href="{{ url('core/groups')}}"><i class="lni-network"></i>  @lang('core.m_groups') </a> </li>
+                <li><a href="{{ url('core/users/blast')}}"><i class="lni-envelope"></i>  @lang('core.m_blastemail') </a></li> 
+                <li><a href="{{ url('core/elfinder')}}"><i class="fa fa-picture-o"></i> Files &  Media </a> </li>
+                <li> <a href="{{ url('core/logs')}}"><i class="fa fa-bookmark-o"></i> @lang('core.m_logs') </a>  </li>
+                
+              </ul>
+          </div>      
 
-                </ul>
-              </div>
-            </div>
+        </div>
+        <div class="sidebar-menu" id="menu-page" >
+          <div class="p-3">
+            <ul >                    
+                <li class="header-menu"><span > Page & Article Posts  </span></li>
+                <li><a href="{{ url('cms/pages')}}"><i class="lni-empty-file"></i>   @lang('core.m_pagecms')  </a></li>
+                <li ><a href="{{ url('cms/posts')}}"><i class="lni-files"></i>  @lang('core.m_post')</a></li>
+                <li ><a href="{{ url('cms/categories')}}"><i class="lni-bookmark"></i>  Categories </a></li>
+              
+                
+              </ul>
+          </div>      
 
-            <div class="sidebar-menu" id="menu-admin" >
-              <div class="p-3">
-                <ul >
-                  <li class="header-menu"><span > Users and Activities  </span></li>
-                    <li ><a href="{{ url('core/users')}}"><i class="lni-users"></i>  @lang('core.m_users') <br /></a> </li> 
-                    <li ><a href="{{ url('core/groups')}}"><i class="lni-network"></i>  @lang('core.m_groups') </a> </li>
-                    <li><a href="{{ url('core/users/blast')}}"><i class="lni-envelope"></i>  @lang('core.m_blastemail') </a></li> 
-                    <li><a href="{{ url('core/elfinder')}}"><i class="fa fa-picture-o"></i> Files &  Media </a> </li>
-                    <li> <a href="{{ url('core/logs')}}"><i class="fa fa-bookmark-o"></i> @lang('core.m_logs') </a>  </li>
+        </div>
+        <!-- contoh -->
+        @foreach ($sidebar as $menu)
+        <div class="sidebar-menu" id="{{$menu['menu_id']}}" >
+          <div class="p-3">
+            <ul >                    
+                <li class="header-menu"><span > {{$menu['menu_name']}}  </span></li>
+                @if(count($menu['childs']) > 0 ) 
+                  @foreach ($menu['childs'] as $menu2)
+                    <li>
+                        <a 
+                            @if(count($menu2['childs']) > 0 ) 
+                                href="javascript:void(0);" 
+                            @elseif($menu2['menu_type'] =='external')
+                                href="{{ $menu2['url'] }}" 
+                            @else
+                                href="{{ url($menu2['module'])}}" 
+                            @endif  
+
+                            @if(Request::segment(1) == $menu2['module']) class="active" @endif       
+                        >
+                        <span>  <span class="iconic"> <i class="{{$menu2['menu_icons']}}"></i> </span>  
+                            {{ (isset($menu2['menu_lang']['title'][session('lang')]) ? $menu2['menu_lang']['title'][session('lang')] : $menu2['menu_name']) }}
+                        </span>
+                      </a>
+                    </li>
                     
-                  </ul>
-              </div>      
+                  @endforeach
+                @endif
+              
+                
+              </ul>
+          </div>      
 
-            </div>
-            <div class="sidebar-menu" id="menu-page" >
-              <div class="p-3">
-                <ul >                    
-                    <li class="header-menu"><span > Page & Article Posts  </span></li>
-                    <li><a href="{{ url('cms/pages')}}"><i class="lni-empty-file"></i>   @lang('core.m_pagecms')  </a></li>
-                    <li ><a href="{{ url('cms/posts')}}"><i class="lni-files"></i>  @lang('core.m_post')</a></li>
-                    <li ><a href="{{ url('cms/categories')}}"><i class="lni-bookmark"></i>  Categories </a></li>
-                  
-                    
-                  </ul>
-              </div>      
-
-            </div>
+        </div>
+        @endforeach
+        <!-- end contoh -->
             
-            <div class="sidebar-menu" id="menu-home">
+            
+          <div class="sidebar-menu" id="menu-home2">
               <div class="p-2">
  
 
-            <ul > 
+              <ul > 
                 <li class="header-menu"><span > Main Menu </span></li>
                 <li> <a href="{{ url('dashboard') }}" ><span class="iconic">  <i class="lni-home"></i></span> Dashboard</a></li>
 
-        @foreach ($sidebar as $menu)   
+                @foreach ($sidebar as $menu)   
 
-            @if($menu['module'] =='separator')
-              <li class="header-menu"> <span> {{$menu['menu_name']}} </span></li>  
-
-            @else
-
-                  @if(count($menu['childs']) > 0 ) 
-                       <li class="sidebar-dropdown">
-                  @else 
-                       <li> 
-                  @endif
-
-                <a 
-
-                    @if(count($menu['childs']) > 0 ) 
-                        href="javascript:void(0);" 
-                    @elseif($menu['menu_type'] =='external')
-                        href="{{ $menu['url'] }}" 
+                    @if($menu['module'] =='separator')
+                      <li class="header-menu"> <span> {{$menu['menu_name']}} </span></li>  
                     @else
-                        href="{{ url($menu['module'])}}" 
-                    @endif         
-                    @if(Request::segment(1) == $menu['module']) class="active" @endif
-                    >    
-                    <span class="iconic"> <i class="{{$menu['menu_icons']}}"></i> </span>                                         
-                          {{ (isset($menu['menu_lang']['title'][session('lang')]) ? $menu['menu_lang']['title'][session('lang')] : $menu['menu_name']) }}
-                     
-                        
-                  </a> 
+                      @if(count($menu['childs']) > 0 ) 
+                              <li class="sidebar-dropdown">
+                          @else 
+                              <li> 
+                          @endif
 
-                  @if(count($menu['childs']) > 0 ) 
-                    <div class="sidebar-submenu " >
-                        <ul>
-                            @foreach ($menu['childs'] as $menu2)
-                            <li>
-                                <a 
-                                    @if(count($menu2['childs']) > 0 ) 
-                                        href="javascript:void(0);" 
-                                    @elseif($menu2['menu_type'] =='external')
-                                        href="{{ $menu2['url'] }}" 
-                                    @else
-                                        href="{{ url($menu2['module'])}}" 
-                                    @endif  
+                        <a @if(count($menu['childs']) > 0 ) href="javascript:void(0);" @elseif($menu['menu_type'] =='external') href="{{ $menu['url'] }}" @else href="{{ url($menu['module'])}}" @endif @if(Request::segment(1) == $menu['module']) class="active" @endif >    
+                            <span class="iconic"> <i class="{{$menu['menu_icons']}}"></i> </span>                                         
+                              {{ (isset($menu['menu_lang']['title'][session('lang')]) ? $menu['menu_lang']['title'][session('lang')] : $menu['menu_name']) }}                                
+                        </a> 
 
-                                    @if(Request::segment(1) == $menu2['module']) class="active" @endif       
-                                >
-                                 <span>
-                                    {{ (isset($menu2['menu_lang']['title'][session('lang')]) ? $menu2['menu_lang']['title'][session('lang')] : $menu2['menu_name']) }}
-                                </span>
-                                </a> 
+                          @if(count($menu['childs']) > 0 ) 
+                            <div class="sidebar-submenu " >
+                                <ul>
+                                    @foreach ($menu['childs'] as $menu2)
+                                    <li>
+                                        <a 
+                                            @if(count($menu2['childs']) > 0 ) 
+                                                href="javascript:void(0);" 
+                                            @elseif($menu2['menu_type'] =='external')
+                                                href="{{ $menu2['url'] }}" 
+                                            @else
+                                                href="{{ url($menu2['module'])}}" 
+                                            @endif  
 
-                                @if(count($menu2['childs']) > 0 ) 
-                                    <div class="sidebar-submenu " >
-                                        <ul>
-                                            @foreach ($menu2['childs'] as $menu3)
-                                            <li>
-                                                <a 
-                                                    @if(count($menu3['childs']) > 0 ) 
-                                                        href="javascript:void(0);" 
-                                                    @elseif($menu3['menu_type'] =='external')
-                                                        href="{{ $menu3['url'] }}" 
-                                                    @else
-                                                        href="{{ url($menu3['module'])}}" 
-                                                    @endif  
+                                            @if(Request::segment(1) == $menu2['module']) class="active" @endif       
+                                        >
+                                        <span>
+                                            {{ (isset($menu2['menu_lang']['title'][session('lang')]) ? $menu2['menu_lang']['title'][session('lang')] : $menu2['menu_name']) }}
+                                        </span>
+                                        </a> 
 
-                                                    @if(Request::segment(1) == $menu3['module']) class="active" @endif       
-                                                >
-                                                 <span>
-                                                    {{ (isset($menu3['menu_lang']['title'][session('lang')]) ? $menu3['menu_lang']['title'][session('lang')] : $menu3['menu_name']) }}
-                                                </span>
-                                                </a> 
-                                            </li>
+                                        @if(count($menu2['childs']) > 0 ) 
+                                            <div class="sidebar-submenu " >
+                                                <ul>
+                                                    @foreach ($menu2['childs'] as $menu3)
+                                                    <li>
+                                                        <a 
+                                                            @if(count($menu3['childs']) > 0 ) 
+                                                                href="javascript:void(0);" 
+                                                            @elseif($menu3['menu_type'] =='external')
+                                                                href="{{ $menu3['url'] }}" 
+                                                            @else
+                                                                href="{{ url($menu3['module'])}}" 
+                                                            @endif  
 
-                                            @endforeach
+                                                            @if(Request::segment(1) == $menu3['module']) class="active" @endif       
+                                                        >
+                                                        <span>
+                                                            {{ (isset($menu3['menu_lang']['title'][session('lang')]) ? $menu3['menu_lang']['title'][session('lang')] : $menu3['menu_name']) }}
+                                                        </span>
+                                                        </a> 
+                                                    </li>
 
-                                        </ul>
-                                    </div>
-                                @endif
+                                                    @endforeach
 
-                            </li>
+                                                </ul>
+                                            </div>
+                                        @endif
 
-                            @endforeach
+                                    </li>
 
-                        </ul>
-                    </div>
-                  @endif
+                                    @endforeach
+
+                                </ul>
+                            </div>
+                          @endif
 
 
-            </li>       
-            @endif
+                    </li>       
+                    @endif
 
-           
-        @endforeach
+                  
+                @endforeach
             </div>
           </div>
       
