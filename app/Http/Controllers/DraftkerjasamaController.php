@@ -1,28 +1,28 @@
 <?php namespace App\Http\Controllers;
 
-use App\Models\Dokumenkerjasama;
+use App\Models\Draftkerjasama;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Validator, Input, Redirect ; 
-use DB;
 
-class DokumenkerjasamaController extends Controller {
+
+class DraftkerjasamaController extends Controller {
 
 	protected $layout = "layouts.main";
 	protected $data = array();	
-	public $module = 'dokumenkerjasama';
+	public $module = 'draftkerjasama';
 	static $per_page	= '50';
 
 	public function __construct()
 	{		
 		parent::__construct();
-		$this->model = new Dokumenkerjasama();	
+		$this->model = new Draftkerjasama();	
 		
 		$this->info = $this->model->makeInfo( $this->module);	
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
-			'pageModule'=> 'dokumenkerjasama',
+			'pageModule'=> 'draftkerjasama',
 			'return'	=> self::returnUrl()
 			
 		);
@@ -179,8 +179,8 @@ class DokumenkerjasamaController extends Controller {
 	public static function display(  )
 	{
 		$mode  = isset($_GET['view']) ? 'view' : 'default' ;
-		$model  = new Dokumenkerjasama();
-		$info = $model::makeInfo('dokumenkerjasama');
+		$model  = new Draftkerjasama();
+		$info = $model::makeInfo('draftkerjasama');
 		$data = array(
 			'pageTitle'	=> 	$info['title'],
 			'pageNote'	=>  $info['note']			
@@ -194,7 +194,7 @@ class DokumenkerjasamaController extends Controller {
 				$data['row'] =  $row;
 				$data['fields'] 		=  \SiteHelpers::fieldLang($info['config']['grid']);
 				$data['id'] = $id;
-				return view('dokumenkerjasama.public.view',$data);			
+				return view('draftkerjasama.public.view',$data);			
 			}			
 		} 
 		else {
@@ -218,7 +218,7 @@ class DokumenkerjasamaController extends Controller {
 			$pagination->setPath('');
 			$data['i']			= ($page * $params['limit'])- $params['limit']; 
 			$data['pagination'] = $pagination;
-			return view('dokumenkerjasama.public.index',$data);	
+			return view('draftkerjasama.public.index',$data);	
 		}
 
 	}
@@ -238,11 +238,5 @@ class DokumenkerjasamaController extends Controller {
 
 		}	
 	
-	}
-
-	public function cetak($id){
-		$data['header'] = Dokumenkerjasama::find($id);
-		return view('print.print_dokumen',$data);
-
 	}
 }

@@ -3,9 +3,9 @@
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class dokumenkerjasama extends Sximo  {
+class draftkerjasama extends Sximo  {
 	
-	protected $table = 'tb_dokumen_kerjasama';
+	protected $table = 'tb_usulan_kerjasama';
 	protected $primaryKey = 'id';
 
 	public function __construct() {
@@ -15,20 +15,16 @@ class dokumenkerjasama extends Sximo  {
 
 	public static function querySelect(  ){
 		
-		return " SELECT tb_dokumen_kerjasama.* FROM tb_dokumen_kerjasama ";
+		return "  SELECT tb_usulan_kerjasama.* FROM tb_usulan_kerjasama  ";
 	}	
 
 	public static function queryWhere(  ){
 		
-		return " WHERE tb_dokumen_kerjasama.id IS NOT NULL ";
+		return "  WHERE tb_usulan_kerjasama.id IS NOT NULL ";
 	}
 	
 	public static function queryGroup(){
 		return "  ";
-	}
-
-	public static function get_headers_doc($id){
-		
 	}
 	
 

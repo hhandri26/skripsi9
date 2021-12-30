@@ -33,8 +33,16 @@
 									  <div class="form-group row  " >
 										<label for="Jenis Kerjasama" class=" control-label col-md-4 text-left"> Jenis Kerjasama </label>
 										<div class="col-md-6">
-										  <input  type='text' name='jenis_kerjasama' id='jenis_kerjasama' value='{{ $row['jenis_kerjasama'] }}' 
-						     class='form-control form-control-sm ' /> 
+										  
+					<?php $jenis_kerjasama = explode(',',$row['jenis_kerjasama']);
+					$jenis_kerjasama_opt = array( 'Pendidikan' => 'Pendidikan' ,  'Perusahaan' => 'Perusahaan' ,  'Kesehatan' => 'Kesehatan' , ); ?>
+					<select name='jenis_kerjasama' rows='5'   class='select2 '  > 
+						<?php 
+						foreach($jenis_kerjasama_opt as $key=>$val)
+						{
+							echo "<option  value ='$key' ".($row['jenis_kerjasama'] == $key ? " selected='selected' " : '' ).">$val</option>"; 						
+						}						
+						?></select> 
 										 </div> 
 										 <div class="col-md-2">
 										 	
@@ -43,8 +51,16 @@
 									  <div class="form-group row  " >
 										<label for="Bentuk Kerjasama" class=" control-label col-md-4 text-left"> Bentuk Kerjasama </label>
 										<div class="col-md-6">
-										  <input  type='text' name='bentuk_kerjasama' id='bentuk_kerjasama' value='{{ $row['bentuk_kerjasama'] }}' 
-						     class='form-control form-control-sm ' /> 
+										  
+					<?php $bentuk_kerjasama = explode(',',$row['bentuk_kerjasama']);
+					$bentuk_kerjasama_opt = array( 'Pertuakran Mahasiswa' => 'Pertuakran Mahasiswa' ,  'Pengabdian Kepada Masyarakat' => 'Pengabdian Kepada Masyarakat' , ); ?>
+					<select name='bentuk_kerjasama' rows='5'   class='select2 '  > 
+						<?php 
+						foreach($bentuk_kerjasama_opt as $key=>$val)
+						{
+							echo "<option  value ='$key' ".($row['bentuk_kerjasama'] == $key ? " selected='selected' " : '' ).">$val</option>"; 						
+						}						
+						?></select> 
 										 </div> 
 										 <div class="col-md-2">
 										 	

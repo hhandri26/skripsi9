@@ -65,6 +65,8 @@ include('pages.php');
 Route::resource('sximoapi','SximoapiController');
 Route::resource('services/posts', 'Services\PostController');
 
+Route::get('cetak_document/{id}', 'DokumenkerjasamaController@cetak')->name('cetak_document');
+
 
 
 // Routes for  all generated Module

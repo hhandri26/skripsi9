@@ -9,4 +9,9 @@ Route::resource('dokumenkerjasama','DokumenkerjasamaController');
 Route::resource('usulankerjasama','UsulankerjasamaController');
 // End Routes for usulankerjasama 
 
+                    
+// Start Routes for draftkerjasama 
+Route::resource('draftkerjasama','DraftkerjasamaController');
+// End Routes for draftkerjasama 
+
                     ?>

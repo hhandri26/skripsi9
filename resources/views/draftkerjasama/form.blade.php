@@ -1,35 +1,50 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="page-header"><h2> {{ $pageTitle }} <small> {{ $pageNote }} </small> </h2></div>
+
+	{!! Form::open(array('url'=>'draftkerjasama?return='.$return, 'class'=>'form-horizontal validated sximo-form','files' => true ,'id'=> 'FormTable' )) !!}
+	<div class="toolbar-nav">
+		<div class="row">
+			
+			<div class="col-md-6 " >
+				<div class="submitted-button">
+					<button name="apply" class="tips btn btn-sm   "  title="{{ __('core.btn_back') }}" ><i class="fa  fa-check"></i> {{ __('core.sb_apply') }} </button>
+					<button name="save" class="tips btn btn-sm "  id="saved-button" title="{{ __('core.btn_back') }}" ><i class="fa  fa-paste"></i> {{ __('core.sb_save') }} </button> 
+				</div>	
+			</div>
+			<div class="col-md-6 text-right " >
+				<a href="{{ url($pageModule.'?return='.$return) }}" class="tips btn   btn-sm "  title="{{ __('core.btn_back') }}" ><i class="fa  fa-times"></i></a> 
+			</div>
+		</div>
+	</div>	
 
 
-		 {!! Form::open(array('url'=>'usulankerjasama', 'class'=>'form-horizontal','files' => true , 'parsley-validate'=>'','novalidate'=>' ')) !!}
-
-	@if(Session::has('messagetext'))
-	  
-		   {!! Session::get('messagetext') !!}
-	   
-	@endif
-	<ul class="parsley-error-list">
-		@foreach($errors->all() as $error)
-			<li>{{ $error }}</li>
-		@endforeach
-	</ul>		
-
-
-<div class="col-md-6">
-						<fieldset><legend> Usulan Dokumen</legend>
-				{!! Form::hidden('id', $row['id']) !!}					
+	<div class="p-5">
+		<ul class="parsley-error-list">
+			@foreach($errors->all() as $error)
+				<li>{{ $error }}</li>
+			@endforeach
+		</ul>		
+		<div class="row">
+	<div class="col-md-12">
+						<fieldset><legend> Draft kerjasama</legend>
+									
+									  <div class="form-group row  " >
+										<label for="Id" class=" control-label col-md-4 text-left"> Id </label>
+										<div class="col-md-6">
+										  <input  type='text' name='id' id='id' value='{{ $row['id'] }}' 
+						     class='form-control form-control-sm ' /> 
+										 </div> 
+										 <div class="col-md-2">
+										 	
+										 </div>
+									  </div> 					
 									  <div class="form-group row  " >
 										<label for="Jenis Kerjasama" class=" control-label col-md-4 text-left"> Jenis Kerjasama </label>
 										<div class="col-md-6">
-										  
-					<?php $jenis_kerjasama = explode(',',$row['jenis_kerjasama']);
-					$jenis_kerjasama_opt = array( 'Pendidikan' => 'Pendidikan' ,  'Perusahaan' => 'Perusahaan' ,  'Kesehatan' => 'Kesehatan' , ); ?>
-					<select name='jenis_kerjasama' rows='5'   class='select2 '  > 
-						<?php 
-						foreach($jenis_kerjasama_opt as $key=>$val)
-						{
-							echo "<option  value ='$key' ".($row['jenis_kerjasama'] == $key ? " selected='selected' " : '' ).">$val</option>"; 						
-						}						
-						?></select> 
+										  <input  type='text' name='jenis_kerjasama' id='jenis_kerjasama' value='{{ $row['jenis_kerjasama'] }}' 
+						     class='form-control form-control-sm ' /> 
 										 </div> 
 										 <div class="col-md-2">
 										 	
@@ -38,16 +53,8 @@
 									  <div class="form-group row  " >
 										<label for="Bentuk Kerjasama" class=" control-label col-md-4 text-left"> Bentuk Kerjasama </label>
 										<div class="col-md-6">
-										  
-					<?php $bentuk_kerjasama = explode(',',$row['bentuk_kerjasama']);
-					$bentuk_kerjasama_opt = array( 'Pertuakran Mahasiswa' => 'Pertuakran Mahasiswa' ,  'Pengabdian Kepada Masyarakat' => 'Pengabdian Kepada Masyarakat' , ); ?>
-					<select name='bentuk_kerjasama' rows='5'   class='select2 '  > 
-						<?php 
-						foreach($bentuk_kerjasama_opt as $key=>$val)
-						{
-							echo "<option  value ='$key' ".($row['bentuk_kerjasama'] == $key ? " selected='selected' " : '' ).">$val</option>"; 						
-						}						
-						?></select> 
+										  <input  type='text' name='bentuk_kerjasama' id='bentuk_kerjasama' value='{{ $row['bentuk_kerjasama'] }}' 
+						     class='form-control form-control-sm ' /> 
 										 </div> 
 										 <div class="col-md-2">
 										 	
@@ -86,23 +93,13 @@
 									  <div class="form-group row  " >
 										<label for="Dokumen" class=" control-label col-md-4 text-left"> Dokumen </label>
 										<div class="col-md-6">
-										  
-						<div class="fileUpload btn " > 
-						    <span>  <i class="fa fa-copy"></i>  </span>
-						    <div class="title"> Browse File </div>
-						    <input type="file" name="dokumen" class="upload"       />
-						</div>
-						<div class="dokumen-preview preview-upload">
-							{!! SiteHelpers::showUploadedFile( $row["dokumen"],"dokumen_usulan") !!}
-						</div>
-					 
+										  <textarea name='dokumen' rows='5' id='dokumen' class='form-control form-control-sm '  
+				           >{{ $row['dokumen'] }}</textarea> 
 										 </div> 
 										 <div class="col-md-2">
 										 	
 										 </div>
-									  </div> </fieldset></div><div class="col-md-6">
-						<fieldset><legend> Penanggung Jawab</legend>
-									
+									  </div> 					
 									  <div class="form-group row  " >
 										<label for="Nama Penandatangan" class=" control-label col-md-4 text-left"> Nama Penandatangan </label>
 										<div class="col-md-6">
@@ -156,13 +153,8 @@
 									  <div class="form-group row  " >
 										<label for="Tgl Mulai" class=" control-label col-md-4 text-left"> Tgl Mulai </label>
 										<div class="col-md-6">
-										  
-				<div class="input-group input-group-sm m-b" style="width:150px !important;">
-					{!! Form::text('tgl_mulai', $row['tgl_mulai'],array('class'=>'form-control form-control-sm date')) !!}
-					<div class="input-group-append">
-					 	<div class="input-group-text"><i class="fa fa-calendar"></i></span></div>
-					 </div>
-				</div> 
+										  <input  type='text' name='tgl_mulai' id='tgl_mulai' value='{{ $row['tgl_mulai'] }}' 
+						     class='form-control form-control-sm ' /> 
 										 </div> 
 										 <div class="col-md-2">
 										 	
@@ -171,40 +163,32 @@
 									  <div class="form-group row  " >
 										<label for="Tgl Berakhir" class=" control-label col-md-4 text-left"> Tgl Berakhir </label>
 										<div class="col-md-6">
-										  
-				<div class="input-group input-group-sm m-b" style="width:150px !important;">
-					{!! Form::text('tgl_berakhir', $row['tgl_berakhir'],array('class'=>'form-control form-control-sm date')) !!}
-					<div class="input-group-append">
-					 	<div class="input-group-text"><i class="fa fa-calendar"></i></span></div>
-					 </div>
-				</div> 
+										  <input  type='text' name='tgl_berakhir' id='tgl_berakhir' value='{{ $row['tgl_berakhir'] }}' 
+						     class='form-control form-control-sm ' /> 
 										 </div> 
 										 <div class="col-md-2">
 										 	
 										 </div>
 									  </div> </fieldset></div>
-
-			<div style="clear:both"></div>	
-				
-					
-				  <div class="form-group">
-					<label class="col-sm-4 text-right">&nbsp;</label>
-					<div class="col-sm-8">	
-					<button type="submit" name="apply" class="btn btn-default btn-sm" ><i class="fa  fa-check-circle"></i> {{ Lang::get('core.sb_apply') }}</button>
-					<button type="submit" name="submit" class="btn btn-default btn-sm" ><i class="fa  fa-save "></i> {{ Lang::get('core.sb_save') }}</button>
-				  </div>	  
-			
-		</div> 
-		 <input type="hidden" name="action_task" value="public" />
-		 {!! Form::close() !!}
+	
+		</div>
+		
+		<input type="hidden" name="action_task" value="save" />
+		
+		</div>
+	</div>		
+	{!! Form::close() !!}
 		 
    <script type="text/javascript">
 	$(document).ready(function() { 
 		
-		 
+		
+		 	
+		 	 
 
-		$('.removeCurrentFiles').on('click',function(){
-			var removeUrl = $(this).attr('href');
+		$('.removeMultiFiles').on('click',function(){
+			var removeUrl = '{{ url("draftkerjasama/removefiles?file=")}}'+$(this).attr('url');
+			$(this).parent().remove();
 			$.get(removeUrl,function(response){});
 			$(this).parent('div').empty();	
 			return false;
@@ -212,3 +196,4 @@
 		
 	});
 	</script>		 
+@stop

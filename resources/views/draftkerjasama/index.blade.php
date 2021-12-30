@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-md-8"> 	
 			@if($access['is_add'] ==1)
-			<a href="{{ url('dokumenkerjasama/create?return='.$return) }}" class="btn  btn-sm"  
+			<a href="{{ url('draftkerjasama/create?return='.$return) }}" class="btn  btn-sm"  
 				title="{{ __('core.btn_create') }}"><i class=" fa fa-plus "></i> Create New </a>
 			@endif
 
@@ -61,7 +61,7 @@
 
 			<!-- Table Grid -->
 			
- 			{!! Form::open(array('url'=>'dokumenkerjasama?'.$return, 'class'=>'form-horizontal m-t' ,'id' =>'SximoTable' )) !!}
+ 			{!! Form::open(array('url'=>'draftkerjasama?'.$return, 'class'=>'form-horizontal m-t' ,'id' =>'SximoTable' )) !!}
 			
 		    <table class="table  table-hover " id="{{ $pageModule }}Table">
 		        <thead>
@@ -101,18 +101,16 @@
 								  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"> {{ __('core.btn_action') }} </button>
 								  <ul class="dropdown-menu">
 								 	@if($access['is_detail'] ==1)
-									<li class="nav-item"><a href="{{ url('dokumenkerjasama/'.$row->id.'?return='.$return)}}" class="nav-link tips" title="{{ __('core.btn_view') }}"> {{ __('core.btn_view') }} </a></li>
+									<li class="nav-item"><a href="{{ url('draftkerjasama/'.$row->id.'?return='.$return)}}" class="nav-link tips" title="{{ __('core.btn_view') }}"> {{ __('core.btn_view') }} </a></li>
 									@endif
 									@if($access['is_edit'] ==1)
-									<li class="nav-item"><a  href="{{ url('dokumenkerjasama/'.$row->id.'/edit?return='.$return) }}" class="nav-link  tips" title="{{ __('core.btn_edit') }}"> {{ __('core.btn_edit') }} </a></li>
+									<li class="nav-item"><a  href="{{ url('draftkerjasama/'.$row->id.'/edit?return='.$return) }}" class="nav-link  tips" title="{{ __('core.btn_edit') }}"> {{ __('core.btn_edit') }} </a></li>
 									@endif
 									<div class="dropdown-divider"></div>
 									@if($access['is_remove'] ==1)
 										<li class="nav-item"><a href="javascript://ajax"  onclick="SximoDelete();" class="nav-link  tips" title="{{ __('core.btn_remove') }}">
 										Remove Selected </a></li>
 									@endif 
-									<li class="nav-item"><a href="{{url('cetak_document/'.$row->id)}}"   class="nav-link  tips" title="{{ __('core.btn_remove') }}">
-										Print Dokumen </a></li>
 								  </ul>
 								</div>
 

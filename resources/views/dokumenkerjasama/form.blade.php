@@ -267,7 +267,7 @@
 									  <div class="form-group row  " >
 										<label for="Isi" class=" control-label col-md-4 text-left"> Isi </label>
 										<div class="col-md-6">
-										  <textarea name='isi' rows='5' id='editor' class='form-control form-control-sm editor '  
+										  <textarea name='isi' rows='5' id='editor' class='form-control form-control-sm '  
 						 >{{ $row['isi'] }}</textarea> 
 										 </div> 
 										 <div class="col-md-2">
