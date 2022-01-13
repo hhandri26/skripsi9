@@ -93,7 +93,9 @@
 										<div class="col-md-6">
 										  
 				<div class="input-group input-group-sm m-b" style="width:150px !important;">
-					{!! Form::text('tgl_mulai', $row['tgl_mulai'],array('class'=>'form-control form-control-sm date')) !!}
+					
+					<input  type='date' name='tgl_mulai' id='tgl_mulai' value='{{ $row['tgl_mulai'] }}' 
+						     class='form-control form-control-sm ' /> 
 					<div class="input-group-append">
 					 	<div class="input-group-text"><i class="fa fa-calendar"></i></span></div>
 					 </div>
@@ -108,7 +110,9 @@
 										<div class="col-md-6">
 										  
 				<div class="input-group input-group-sm m-b" style="width:150px !important;">
-					{!! Form::text('tgl_berakhir', $row['tgl_berakhir'],array('class'=>'form-control form-control-sm date')) !!}
+					
+					<input  type='date' name='tgl_berakhir' id='tgl_berakhir' value='{{ $row['tgl_berakhir'] }}' 
+						     class='form-control form-control-sm ' /> 
 					<div class="input-group-append">
 					 	<div class="input-group-text"><i class="fa fa-calendar"></i></span></div>
 					 </div>

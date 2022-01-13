@@ -20,16 +20,8 @@
 									  <div class="form-group row  " >
 										<label for="Jenis Kerjasama" class=" control-label col-md-4 text-left"> Jenis Kerjasama </label>
 										<div class="col-md-6">
-										  
-					<?php $jenis_kerjasama = explode(',',$row['jenis_kerjasama']);
-					$jenis_kerjasama_opt = array( 'Pendidikan' => 'Pendidikan' ,  'Perusahaan' => 'Perusahaan' ,  'Kesehatan' => 'Kesehatan' , ); ?>
-					<select name='jenis_kerjasama' rows='5'   class='select2 '  > 
-						<?php 
-						foreach($jenis_kerjasama_opt as $key=>$val)
-						{
-							echo "<option  value ='$key' ".($row['jenis_kerjasama'] == $key ? " selected='selected' " : '' ).">$val</option>"; 						
-						}						
-						?></select> 
+										  <input  type='text' name='jenis_kerjasama' id='jenis_kerjasama' value='{{ $row['jenis_kerjasama'] }}' 
+						     class='form-control form-control-sm ' /> 
 										 </div> 
 										 <div class="col-md-2">
 										 	
@@ -38,16 +30,8 @@
 									  <div class="form-group row  " >
 										<label for="Bentuk Kerjasama" class=" control-label col-md-4 text-left"> Bentuk Kerjasama </label>
 										<div class="col-md-6">
-										  
-					<?php $bentuk_kerjasama = explode(',',$row['bentuk_kerjasama']);
-					$bentuk_kerjasama_opt = array( 'Pertuakran Mahasiswa' => 'Pertuakran Mahasiswa' ,  'Pengabdian Kepada Masyarakat' => 'Pengabdian Kepada Masyarakat' , ); ?>
-					<select name='bentuk_kerjasama' rows='5'   class='select2 '  > 
-						<?php 
-						foreach($bentuk_kerjasama_opt as $key=>$val)
-						{
-							echo "<option  value ='$key' ".($row['bentuk_kerjasama'] == $key ? " selected='selected' " : '' ).">$val</option>"; 						
-						}						
-						?></select> 
+										  <input  type='text' name='bentuk_kerjasama' id='bentuk_kerjasama' value='{{ $row['bentuk_kerjasama'] }}' 
+						     class='form-control form-control-sm ' /> 
 										 </div> 
 										 <div class="col-md-2">
 										 	
@@ -86,21 +70,12 @@
 									  <div class="form-group row  " >
 										<label for="Dokumen" class=" control-label col-md-4 text-left"> Dokumen </label>
 										<div class="col-md-6">
-										  
-						<div class="fileUpload btn " > 
-						    <span>  <i class="fa fa-copy"></i>  </span>
-						    <div class="title"> Browse File </div>
-						    <input type="file" name="dokumen" class="upload"       />
-						</div>
-						<div class="dokumen-preview preview-upload">
-							{!! SiteHelpers::showUploadedFile( $row["dokumen"],"dokumen_usulan") !!}
-						</div>
-					 
+										  <select name='dokumen' rows='5' id='dokumen' class='select2 '   ></select> 
 										 </div> 
 										 <div class="col-md-2">
 										 	
 										 </div>
-									  </div> </fieldset></div><div class="col-md-6">
+									  </div> {!! Form::hidden('status', $row['status']) !!}{!! Form::hidden('remaks', $row['remaks']) !!}</fieldset></div><div class="col-md-6">
 						<fieldset><legend> Penanggung Jawab</legend>
 									
 									  <div class="form-group row  " >
@@ -201,6 +176,9 @@
    <script type="text/javascript">
 	$(document).ready(function() { 
 		
+		
+		$("#dokumen").jCombo("{!! url('usulankerjasama/comboselect?filter=tb_dokumen_kerjasama:id:nama_dokumen') !!}",
+		{  selected_value : '{{ $row["dokumen"] }}' });
 		 
 
 		$('.removeCurrentFiles').on('click',function(){

@@ -110,6 +110,18 @@
 						
 					</tr>
 				
+					<tr>
+						<td width='30%' class='label-view text-right'>{{ SiteHelpers::activeLang('Status', (isset($fields['status']['language'])? $fields['status']['language'] : array())) }}</td>
+						<td>{{ $row->status}} </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>{{ SiteHelpers::activeLang('Remaks', (isset($fields['remaks']['language'])? $fields['remaks']['language'] : array())) }}</td>
+						<td>{{ $row->remaks}} </td>
+						
+					</tr>
+				
 			</tbody>	
 		</table>   
 

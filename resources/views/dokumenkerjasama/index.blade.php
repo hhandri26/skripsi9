@@ -111,8 +111,8 @@
 										<li class="nav-item"><a href="javascript://ajax"  onclick="SximoDelete();" class="nav-link  tips" title="{{ __('core.btn_remove') }}">
 										Remove Selected </a></li>
 									@endif 
-									<li class="nav-item"><a href="{{url('cetak_document/'.$row->id)}}"   class="nav-link  tips" title="{{ __('core.btn_remove') }}">
-										Print Dokumen </a></li>
+									<li class="nav-item"><a href="{{ url('cetak_document/'.$row->id) }}"   class="nav-link  tips" title="{{ __('core.btn_remove') }}">
+										Cetak Dokumen </a></li>
 								  </ul>
 								</div>
 

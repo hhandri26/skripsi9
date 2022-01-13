@@ -26,10 +26,6 @@ class dokumenkerjasama extends Sximo  {
 	public static function queryGroup(){
 		return "  ";
 	}
-
-	public static function get_headers_doc($id){
-		
-	}
 	
 
 }

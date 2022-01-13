@@ -15,12 +15,12 @@ class usulankerjasama extends Sximo  {
 
 	public static function querySelect(  ){
 		
-		return "  SELECT tb_usulan_kerjasama.* FROM tb_usulan_kerjasama  ";
+		return " SELECT tb_usulan_kerjasama.* FROM tb_usulan_kerjasama ";
 	}	
 
 	public static function queryWhere(  ){
 		
-		return "  WHERE tb_usulan_kerjasama.id IS NOT NULL ";
+		return " WHERE tb_usulan_kerjasama.id IS NOT NULL ";
 	}
 	
 	public static function queryGroup(){

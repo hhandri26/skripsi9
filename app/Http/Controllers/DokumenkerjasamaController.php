@@ -4,7 +4,7 @@ use App\Models\Dokumenkerjasama;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Validator, Input, Redirect ; 
-use DB;
+
 
 class DokumenkerjasamaController extends Controller {
 
