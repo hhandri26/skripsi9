@@ -41,12 +41,20 @@ class DashboardController extends Controller {
 						->select(DB::Raw('count(id) as total'))
 						->pluck('total')
 						->first();
+						
+		$count_interval = DB::table('tb_dokumen_kerjasama')
+						->select(DB::Raw('count(id) as total'))
+						->whereRaw('tgl_berakhir - INTERVAL 14 DAY <= NOW()')
+						->pluck('total')
+						->first();
+		//var_dump($count_interval);die();
 		
 		$this->data = array_merge(array(
 			'count_per_month'	=> 	$count_per_month,
 			'count_user' 	=> $count_user,
 			'count_document' =>$count_document,
-			'usulan_kerjasama' =>$usulan_kerjasama
+			'usulan_kerjasama' =>$usulan_kerjasama,
+			'interval'	=> $count_interval
 			
 		),$this->data);
 	

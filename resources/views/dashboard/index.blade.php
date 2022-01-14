@@ -45,6 +45,19 @@
         </div>                 
       </div>
     </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class=" info-box" >
+        <div class="icon bg-cyan">
+          <i class="fa fa-shopping-cart"></i>
+        </div>
+        <div class="content">
+          <h4> {{$interval}} </h4>
+         Dokumen Akan Berkahir Dalam 14 Hari
+          
+        </div>                 
+      </div>
+    </div>
    
   </div>  
   <div class="row">
